@@ -1,0 +1,9 @@
+.env
+google_ads_config.yaml
+venv/
+__pycache__/
+logs/
+reports/
+*.pyc
+*:Zone.Identifier
+.claude/
