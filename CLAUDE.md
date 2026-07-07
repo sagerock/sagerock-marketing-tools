@@ -76,3 +76,18 @@ iconv -f UTF-16 -t UTF-8 input.csv > output.csv
 ## Output Files
 
 Reports are written to `reports/` directory as CSV files and markdown. The main analysis report is `reports/Alconox_2024_vs_2025_Analysis.md`.
+
+## Related capability: CfA Facebook Ads access (not wired into this repo)
+
+Noted here for cross-reference — this is **not** an Alconox source and lives in another project.
+We have API access to **Center for Anthroposophy's** Meta / Facebook ad account (`act_45601263`,
+owned by CfA's own Business Manager) via a permanent SageRock system-user token. The token's scopes
+allow **both reporting and management**: `ads_read` (insights/reports), `ads_management`
+(create/modify campaigns, ad sets, ads, budgets, pause/resume), and `leads_retrieval`.
+
+- **Where it lives:** the `sagerock-schools` repo — a daily cron syncs campaign×day insights into
+  the `meta_ads_daily` table (`scripts/meta-bootstrap.mjs` to onboard, `scripts/meta-sync.mjs` to
+  sync). CfA is `client_id 22500cd6-052a-42ff-a0cb-4f3ba9125dfd` there.
+- **Built today = read-only reporting.** Create/modify-campaign capability exists on the token but
+  no write code exists yet. Full details in
+  `/mnt/d/dev/sagerock/clients/center-for-anthroposophy/CLAUDE.md`.
