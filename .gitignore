@@ -7,3 +7,4 @@ reports/
 *.pyc
 *:Zone.Identifier
 .claude/
+google_ads_config.yaml.corrupt-*
