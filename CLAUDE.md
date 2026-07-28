@@ -27,8 +27,9 @@ python export_for_ai.py
 # Run Google Ads analyzer
 python google_ads_analyzer.py
 
-# Re-authenticate Google Ads OAuth (if token expires)
-python google_ads_auth.py
+# Re-authenticate Google Ads OAuth (if token expires) — two steps, see below
+python google_ads_reauth.py url
+python google_ads_reauth.py code "<paste code or full localhost URL>"
 
 # Run AI-powered analysis (requires ANTHROPIC_API_KEY)
 python ai_analyzer.py
@@ -63,6 +64,43 @@ python ai_analyzer.py
 ```bash
 iconv -f UTF-16 -t UTF-8 input.csv > output.csv
 ```
+
+## Google Ads authentication — passkey requirement + the two-copy gotcha
+
+**Auth model:** user OAuth workflow (a `refresh_token` in `google_ads_config.yaml`), *not* a
+service account. The Google account that authorizes MCC **328-254-2648** is
+**`sagerock@gmail.com`** — not `sage@sagerock.com`. Any re-auth consent screen must be
+completed while signed in as that account.
+
+**Passkeys required from 2026-08-05.** Google now requires a passkey to mint *new* OAuth
+refresh tokens for the Ads API (announced 2026-07-28). Existing refresh tokens are exempt and
+keep working indefinitely — this only bites at re-auth time. Status: **already satisfied** —
+`sagerock@gmail.com` has a passkey stored in **1Password**, so a re-auth can be completed from
+any device (desktop, ThinkPad, MacBook, phone). Don't let anyone "fix" this by creating a
+Windows Hello passkey instead; that would pin re-auth to the desktop's biometrics. Note a new
+passkey takes **7 days** to become trusted, so never delete this one casually.
+
+Same requirement hits Google Ads Editor, Ads scripts, and any BigQuery Data Transfer / Looker
+Studio connection on that account.
+
+**Re-auth flow** — use `google_ads_reauth.py` (loopback flow), *not* `google_ads_auth.py`
+(uses the `oob` redirect Google disabled in 2022; kept only for reference). The consent URL can
+be opened on any device; the browser will fail to load `http://localhost/?code=...`, which is
+expected — copy the `code=` value from the address bar.
+
+**⚠️ Two independent copies of this repo exist**, and a re-auth must update *both*:
+
+| Path | Role |
+|------|------|
+| `/mnt/d/dev/sagerock-marketing-tools` | dev/working copy (this one) |
+| `/home/sage/scripts/sagerock-marketing-tools` | what **cron actually runs** |
+
+They are separate git repos, not symlinks. The Monday 8:07am cron
+(`7 8 * * 1 /home/sage/scripts/sagerock-marketing-tools/run_weekly_ads_email.sh` →
+`weekly_ads_email.py`, logs to `logs/weekly_ads_email.log`) reads the *`/home/sage/scripts`*
+copy's `google_ads_config.yaml`. Writing a fresh `refresh_token` only into the dev copy leaves
+the weekly email silently broken until the next Monday. As of 2026-07-28 both configs hold the
+same token. Last re-auth: 2026-07-19 (see `google_ads_config.yaml.corrupt-2026-07-19`).
 
 ### Site IDs (Matomo)
 
