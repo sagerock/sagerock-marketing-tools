@@ -135,7 +135,7 @@ def generate_report():
 
     # Date ranges
     today = datetime.now()
-    this_week_end = today.strftime("%Y-%m-%d")
+    this_week_end = (today - timedelta(days=1)).strftime("%Y-%m-%d")
     this_week_start = (today - timedelta(days=7)).strftime("%Y-%m-%d")
     last_week_end = (today - timedelta(days=8)).strftime("%Y-%m-%d")
     last_week_start = (today - timedelta(days=14)).strftime("%Y-%m-%d")

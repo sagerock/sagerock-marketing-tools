@@ -73,9 +73,9 @@ def markdown_to_html(md):
             by a script running on Sage's desktop computer. It pulls the last 7 days of Google Ads data
             from all accounts under the SageRock MCC via the Google Ads API, compares it to the previous
             week, and flags any issues (high spend with no conversions, low CTR, expensive CPCs, etc.).<br><br>
-            <strong style='color:#444;'>Files:</strong> <code>/home/sage/scripts/alconox-matomo-api/weekly_ads_email.py</code><br>
+            <strong style='color:#444;'>Files:</strong> <code>/home/sage/scripts/sagerock-marketing-tools/weekly_ads_email.py</code><br>
             <strong style='color:#444;'>Cron:</strong> Every Monday at 8:07 AM (system crontab)<br>
-            <strong style='color:#444;'>Logs:</strong> <code>/home/sage/scripts/alconox-matomo-api/logs/weekly_ads_email.log</code><br>
+            <strong style='color:#444;'>Logs:</strong> <code>/home/sage/scripts/sagerock-marketing-tools/logs/weekly_ads_email.log</code><br>
             <strong style='color:#444;'>Note:</strong> If Sage's desktop is off on Monday morning, the report won't send until the next Monday. Reports are also saved locally in <code>reports/</code>.
         </div>
         <p style='color:#999; font-size:12px;'>
@@ -112,7 +112,7 @@ def send_email(report_md, to_email=["sage@sagerock.com", "rocky@sagerock.com", "
         sg = SendGridAPIClient(api_key)
         response = sg.send(message)
         print(f"Email sent to {to_email} (status: {response.status_code})")
-        return True
+        return 200 <= response.status_code < 300
     except Exception as e:
         print(f"Error sending email: {e}")
         return False
@@ -131,7 +131,8 @@ def main():
     print(f"Report saved to {filename}")
 
     # Send email
-    send_email(report)
+    if not send_email(report):
+        raise RuntimeError("Weekly Google Ads report email failed")
 
 
 if __name__ == "__main__":
