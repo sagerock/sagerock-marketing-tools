@@ -4,6 +4,7 @@ venv/
 __pycache__/
 logs/
 reports/
+snapshots/
 *.pyc
 *:Zone.Identifier
 .claude/
