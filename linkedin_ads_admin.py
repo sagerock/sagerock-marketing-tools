@@ -36,11 +36,21 @@ VERSION = "202607"   # newest ACTIVE LinkedIn-Version as of 2026-08-04; probe up
 #
 # Phase 1 (both pauses, applied 2026-08-04) is done and verified; its entries were retired
 # from this list. Snapshot: snapshots/campaigns-20260804T100257.json.
+#
+# Phase 2 (LAN OFF on 427658604 / 427628234 / 431005354) was applied and verified
+# 2026-08-17 09:57. Retired from this list too. Snapshot: campaigns-20260817T095752.json.
+#
+# 2026-08-24: campaign 883862684 was built by hand in Campaign Manager for the Halojet
+# creative refresh and came out with Audience Network ON. LinkedIn defaults new campaigns
+# that way and the UI checklist step got missed. It is still DRAFT so it has never
+# delivered. Turning it off brings it in line with the 2026-08-17 ratified decision before
+# Michael reviews it. Also renaming it off LinkedIn's generic default, which is how this
+# account ended up full of campaigns called "Video views - <date>".
 CHANGES = [
     # (campaign_id, {fields}, human label)
-    (427658604, {"offsiteDeliveryEnabled": False}, "Video views - Lab People: LAN ON -> OFF"),
-    (427628234, {"offsiteDeliveryEnabled": False}, "Video Shorts with Ethan's Targeting: LAN ON -> OFF"),
-    (431005354, {"offsiteDeliveryEnabled": False}, "Video views Marketing Cloud Retargeting: LAN ON -> OFF"),
+    (883862684, {"offsiteDeliveryEnabled": False}, "Halojet refresh (883862684): LAN ON -> OFF"),
+    (883862684, {"name": "Halojet refresh - Lab+QC mfg - Sep 2026"},
+     "Halojet refresh (883862684): rename off LinkedIn's default"),
 ]
 # Conversion-rule changes: (rule_id, {fields}, label)
 CONVERSION_CHANGES = []
