@@ -26,6 +26,9 @@ from export_for_ai import export_comprehensive_data
 # Data Aggregation
 # ============================================================
 
+from measurement_breaks import as_prompt_block, as_markdown, console_warning
+
+
 def aggregate_matomo_data(site_ids: list[dict], date_range: DateRange) -> dict:
     """Fetch Matomo data for selected sites, stripping raw_api_data to save tokens."""
     results = {}
@@ -484,6 +487,16 @@ def call_claude_api(data: dict, yoy: bool = False) -> str:
     client = anthropic.Anthropic()
 
     base_prompt = YOY_ANALYSIS_PROMPT if yoy else ANALYSIS_PROMPT
+
+    # Alconox measurement changed on several dates in 2026 (see measurement_breaks.py and
+    # clients/alconox/MEASUREMENT-CHANGELOG.md). Without this the model reports deliberate
+    # tracking changes as performance collapses.
+    rng = (data.get("metadata") or {}).get("date_range") or {}
+    breaks = as_prompt_block(rng.get("start"), rng.get("end")) if rng.get("start") else ""
+    if breaks:
+        console_warning(rng.get("start"), rng.get("end"))
+        base_prompt = breaks + "\n\n" + base_prompt
+
     data_json = json.dumps(data, indent=2, default=str)
     prompt = base_prompt + "\n" + data_json
 
@@ -573,6 +586,7 @@ def save_report(analysis: str, sites: list[dict], date_range: DateRange,
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"reports/AI_Analysis_{sites_label}_{timestamp}.md"
 
+    measurement_note = as_markdown(date_range.start, date_range.end)
     header = f"""# AI-Powered Analytics Report
 ## {', '.join(site_names)}
 ### {date_range.label} ({date_range.start} to {date_range.end})
@@ -582,6 +596,8 @@ def save_report(analysis: str, sites: list[dict], date_range: DateRange,
 **Model:** Claude Opus 4.6
 
 ---
+
+{measurement_note}
 
 """
 
