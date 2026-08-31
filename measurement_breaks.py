@@ -77,6 +77,18 @@ BREAKS = [
         "deliberate": False,
         "affects": ["goals", "Matomo", "Ask Alconox"],
     },
+    {
+        "date": "2026-08-31",
+        "platform": "Athena weekly brief / Matomo ecommerce",
+        "symptom": "The brief's store yr/yr deltas disappear until ~Dec 2026; order "
+                   "counts shift ~1% against prior briefs.",
+        "cause": "Order source switched from Matomo ecommerce tracking to the synced "
+                 "WooCommerce order records, deliberately. Matomo's Aug-2025 baseline was "
+                 "phantom — 84 orders in a month the store was shut (2025 suspension). "
+                 "Matomo ecommerce figures for Jun-Dec 2025 should not be trusted anywhere.",
+        "deliberate": True,
+        "affects": ["orders", "revenue", "ecommerce", "Matomo", "yr/yr"],
+    },
 ]
 
 
