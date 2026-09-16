@@ -9,8 +9,8 @@ SAFETY MODEL
   - `plan` (default) is READ-ONLY. It prints current state and the diff that `apply` would make.
   - `apply` writes, but ALWAYS snapshots current state to snapshots/ first.
   - `revert <snapshot>` restores campaign settings from a snapshot file.
-  - Nothing here activates a paused campaign or creates new spend. The current phase only
-    pauses campaigns. Activation stays a human decision.
+  - Activation is included only when it has been explicitly authorized and recorded in
+    the dated CHANGES block below.
 
 USAGE
   python3 linkedin_ads_admin.py plan
@@ -40,20 +40,44 @@ VERSION = "202607"   # newest ACTIVE LinkedIn-Version as of 2026-08-04; probe up
 # Phase 2 (LAN OFF on 427658604 / 427628234 / 431005354) was applied and verified
 # 2026-08-17 09:57. Retired from this list too. Snapshot: campaigns-20260817T095752.json.
 #
-# 2026-08-24: campaign 883862684 was built by hand in Campaign Manager for the Halojet
-# creative refresh and came out with Audience Network ON. LinkedIn defaults new campaigns
-# that way and the UI checklist step got missed. It is still DRAFT so it has never
-# delivered. Turning it off brings it in line with the 2026-08-17 ratified decision before
-# Michael reviews it. Also renaming it off LinkedIn's generic default, which is how this
-# account ended up full of campaigns called "Video views - <date>".
+# 2026-09-16 09:06 America/New_York: Sage explicitly authorized the reviewed package:
+# retain Ethan at $16/day with expansion off; pause Lab People and Retargeting; activate
+# the approved Halojet draft at $16/day for exactly 30 days. Audience Network stays off.
 CHANGES = [
     # (campaign_id, {fields}, human label)
-    (883862684, {"offsiteDeliveryEnabled": False}, "Halojet refresh (883862684): LAN ON -> OFF"),
-    (883862684, {"name": "Halojet refresh - Lab+QC mfg - Sep 2026"},
-     "Halojet refresh (883862684): rename off LinkedIn's default"),
+    (427628234,
+     {"dailyBudget": {"currencyCode": "USD", "amount": "16"},
+      "audienceExpansionEnabled": False},
+     "Retain Ethan at $16/day with audience expansion OFF"),
+    (427658604, {"status": "PAUSED"}, "Pause Lab People"),
+    (431005354, {"status": "PAUSED"}, "Pause Marketing Cloud Retargeting"),
+    (883862684,
+     {"dailyBudget": {"currencyCode": "USD", "amount": "16"},
+      "offsiteDeliveryEnabled": False,
+      "audienceExpansionEnabled": False,
+      "runSchedule": {"start": 1789564123179, "end": 1792156123179},
+      "status": "ACTIVE"},
+     "Activate Halojet at $16/day for 30 days with LAN/expansion OFF"),
 ]
 # Conversion-rule changes: (rule_id, {fields}, label)
-CONVERSION_CHANGES = []
+CONVERSION_CHANGES = [
+    (29477714,
+     {"campaigns": ["urn:li:sponsoredCampaign:883862684",
+                    "urn:li:sponsoredCampaign:427628234"]},
+     "Attach real Sample Request to Halojet and retained Ethan"),
+    (29477722,
+     {"campaigns": ["urn:li:sponsoredCampaign:883862684",
+                    "urn:li:sponsoredCampaign:427628234"]},
+     "Attach real Ask Alconox to Halojet and retained Ethan"),
+    (23951594,
+     {"campaigns": ["urn:li:sponsoredCampaign:470372034",
+                    "urn:li:sponsoredCampaign:431005354",
+                    "urn:li:sponsoredCampaign:427658604"]},
+     "Detach legacy Key Pages from continuing Halojet and Ethan campaigns"),
+    (22670386,
+     {"campaigns": ["urn:li:sponsoredCampaign:306118774"]},
+     "Detach Add to Cart from Halojet"),
+]
 
 PRIMARY_VIDEO_CAMPAIGNS = (427658604, 427628234, 431005354)
 PLACEMENT_FIELDS = (

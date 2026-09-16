@@ -89,6 +89,18 @@ BREAKS = [
         "deliberate": True,
         "affects": ["orders", "revenue", "ecommerce", "Matomo", "yr/yr"],
     },
+    {
+        "date": "2026-09-16",
+        "platform": "LinkedIn Ads",
+        "symptom": "Reported conversions reset to real Sample Request and Ask Alconox "
+                   "leads and may fall to near zero.",
+        "cause": "Legacy 90-day Key Pages and Add to Cart rules were detached from the "
+                 "two continuing campaigns. Real Sample Request and Ask Alconox rules "
+                 "were attached instead. The active campaign mix also changed: Lab People "
+                 "and Retargeting paused; Ethan retained with expansion off; Halojet launched.",
+        "deliberate": True,
+        "affects": ["conversions", "LinkedIn", "cost per conversion", "campaign mix"],
+    },
 ]
 
 
