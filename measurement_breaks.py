@@ -101,6 +101,20 @@ BREAKS = [
         "deliberate": True,
         "affects": ["conversions", "LinkedIn", "cost per conversion", "campaign mix"],
     },
+    {
+        "date": "2026-09-19",
+        "platform": "alconox.com resource downloads / Matomo / email tool",
+        "symptom": "White paper, tech brief and Aqueous Cleaning Handbook download counts "
+                   "drop or move; the White Paper and Handbook AI follow-ups stop enrolling "
+                   "new people (last 9/18 and 9/17).",
+        "cause": "Gravity download forms replaced by member-account downloads "
+                 "(/member-downloads/). Downloads now land in Salesforce Prospect Activities "
+                 "and campaign 'Resource Download 2026', not in form submissions or the "
+                 "follow-up webhooks. Zero non-test member downloads 9/19-9/22.",
+        "deliberate": True,
+        "affects": ["downloads", "form submissions", "Matomo goals", "AI follow-ups",
+                    "file_download"],
+    },
 ]
 
 
