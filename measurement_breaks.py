@@ -115,6 +115,22 @@ BREAKS = [
         "affects": ["downloads", "form submissions", "Matomo goals", "AI follow-ups",
                     "file_download"],
     },
+    {
+        "date": "2026-09-21",
+        "platform": "Athena weekly brief / Matomo TechNotes scheduled report",
+        "symptom": "Athena's brief shrinks from a trailing 4 weeks to one Mon-Sun week "
+                   "and loses every prior-period and yr/yr delta; all its counts drop to "
+                   "roughly a quarter. Michael's Matomo TechNotes email gains the Sunday "
+                   "evening it used to miss (~2% more visits).",
+        "cause": "Michael asked for apples to apples with his Matomo report until he "
+                 "trusts the data; Sage decided 2026-09-23. Brief now covers the same week "
+                 "as Matomo report 5, and that report moved from 00:00 UTC Monday (8pm ET "
+                 "Sunday) to 10:00 UTC Monday so it counts the finished week. First "
+                 "affected sends: Monday 2026-09-28.",
+        "deliberate": True,
+        "affects": ["TechNotes visits", "pageviews", "leads", "Athena brief",
+                    "Matomo scheduled report", "yr/yr"],
+    },
 ]
 
 
