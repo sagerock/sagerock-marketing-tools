@@ -151,7 +151,7 @@ BREAKS = [
                    "count and names (about 12 a week), its single \"N submissions\" count "
                    "becomes a sample-request count, and downloads and AI chats move to a "
                    "separate line. Every segment is listed instead of the top five.",
-        "why": "The section read only the CRM's form records, where Ask Alconox questions "
+        "cause": "The section read only the CRM's form records, where Ask Alconox questions "
                "never land. The 2026-10-05 brief counted 21 Matomo leads (14 Ask Alconox) "
                "but named none of the askers, cut eight segments to five, and counted three "
                "downloads and a chat as people who asked. Ask Alconox now comes from the "
