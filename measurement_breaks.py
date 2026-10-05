@@ -102,6 +102,19 @@ BREAKS = [
         "affects": ["conversions", "LinkedIn", "cost per conversion", "campaign mix"],
     },
     {
+        "date": "2026-10-05",
+        "platform": "LinkedIn Ads / Matomo campaign labels",
+        "symptom": "LinkedIn clicks from campaigns without their own UTM tags now land in "
+                   "Matomo as campaign 'linkedin' (utm_id = campaign id) instead of "
+                   "'linkedin-halojet-2026q3'.",
+        "cause": "The account-level default tag was a hardcoded Halojet label, so any "
+                 "untagged campaign was mislabelled Halojet (Marketing Cloud Retargeting "
+                 "was, Aug 24 - Sep 16). Halojet now has the same tags at campaign level; "
+                 "the account default is generic with dynamic campaign and creative ids.",
+        "deliberate": True,
+        "affects": ["LinkedIn", "Matomo", "campaigns", "utm"],
+    },
+    {
         "date": "2026-09-19",
         "platform": "alconox.com resource downloads / Matomo / email tool",
         "symptom": "White paper, tech brief and Aqueous Cleaning Handbook download counts "

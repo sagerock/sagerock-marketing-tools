@@ -26,7 +26,7 @@ import json, os, sys, time, urllib.request, urllib.error
 HERE = os.path.dirname(os.path.abspath(__file__))
 ENV = os.path.join(HERE, ".env")
 SNAPDIR = os.path.join(HERE, "snapshots")
-VERSION = "202607"   # newest ACTIVE LinkedIn-Version as of 2026-08-04; probe upward on HTTP 426
+VERSION = "202609"   # verified 2026-10-05; rolling ~12-month window, probe upward on HTTP 426
 
 # ---------------------------------------------------------------- change set
 # Phase 2 ratified by Sage 2026-08-17: turn LinkedIn Audience Network OFF on the three
