@@ -40,24 +40,15 @@ VERSION = "202609"   # verified 2026-10-05; rolling ~12-month window, probe upwa
 # Phase 2 (LAN OFF on 427658604 / 427628234 / 431005354) was applied and verified
 # 2026-08-17 09:57. Retired from this list too. Snapshot: campaigns-20260817T095752.json.
 #
-# 2026-09-16 09:06 America/New_York: Sage explicitly authorized the reviewed package:
-# retain Ethan at $16/day with expansion off; pause Lab People and Retargeting; activate
-# the approved Halojet draft at $16/day for exactly 30 days. Audience Network stays off.
+# 2026-09-16 package (Ethan retained, Lab People + Retargeting paused, Halojet activated)
+# applied and verified; retired from this list.
+#
+# 2026-10-08: Sage explicitly directed stopping ALL Alconox advertising (client says the
+# 2026 ad budget is spent). Pause both live campaigns; nothing else changes.
 CHANGES = [
     # (campaign_id, {fields}, human label)
-    (427628234,
-     {"dailyBudget": {"currencyCode": "USD", "amount": "16"},
-      "audienceExpansionEnabled": False},
-     "Retain Ethan at $16/day with audience expansion OFF"),
-    (427658604, {"status": "PAUSED"}, "Pause Lab People"),
-    (431005354, {"status": "PAUSED"}, "Pause Marketing Cloud Retargeting"),
-    (883862684,
-     {"dailyBudget": {"currencyCode": "USD", "amount": "16"},
-      "offsiteDeliveryEnabled": False,
-      "audienceExpansionEnabled": False,
-      "runSchedule": {"start": 1789564123179, "end": 1792156123179},
-      "status": "ACTIVE"},
-     "Activate Halojet at $16/day for 30 days with LAN/expansion OFF"),
+    (427628234, {"status": "PAUSED"}, "Pause Ethan's Targeting (stop all ads, 2026-10-08)"),
+    (883862684, {"status": "PAUSED"}, "Pause Halojet (stop all ads, 2026-10-08)"),
 ]
 # Conversion-rule changes: (rule_id, {fields}, label)
 CONVERSION_CHANGES = [
