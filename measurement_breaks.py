@@ -161,6 +161,20 @@ BREAKS = [
         "deliberate": True,
         "affects": ["leads", "Athena brief", "Ask Alconox"],
     },
+    {
+        "date": "2026-10-15",
+        "platform": "GTM (Facebook, LinkedIn, Bing pixels)",
+        "symptom": "Small dips possible in LinkedIn Insight, Bing UET and Facebook pixel "
+                   "page views and website audiences. Universal Analytics and Marketing "
+                   "Cloud collect.js stop loading.",
+        "cause": "Mobile speed work requested by 914digital. GTM version 29: the three "
+                 "pixels moved from Page View to Window Loaded, so visitors who leave before "
+                 "the page finishes loading are no longer seen by them. UA (dead since 2023) "
+                 "and both Marketing Cloud tags (http collect.js, blocked as mixed content, "
+                 "recorded nothing) paused. Matomo, GA4 and Google Ads unchanged.",
+        "deliberate": True,
+        "affects": ["LinkedIn", "Facebook", "Bing", "retargeting audiences"],
+    },
 ]
 
 
