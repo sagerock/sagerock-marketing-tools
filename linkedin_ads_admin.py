@@ -43,12 +43,19 @@ VERSION = "202609"   # verified 2026-10-05; rolling ~12-month window, probe upwa
 # 2026-09-16 package (Ethan retained, Lab People + Retargeting paused, Halojet activated)
 # applied and verified; retired from this list.
 #
-# 2026-10-08: Sage explicitly directed stopping ALL Alconox advertising (client says the
-# 2026 ad budget is spent). Pause both live campaigns; nothing else changes.
+# 2026-10-08 pause (all ads stopped) applied and verified; retired from this list.
+#
+# 2026-10-16: Stacy approved restarting ads "at about 2900 per month as we were doing" for the
+# rest of 2026 (board comment 10/14); Sage directed the restart the same day. Bring back the
+# two campaigns paused 10/8 at their old $16/day. Halojet's schedule ended 10/16, so extend it
+# to 2026-12-31 23:59:59 ET. LAN stays off. GOTCHA: a COMPLETED campaign rejects a new end
+# date alone (DATE_IMMUTABLE_WHEN_PASSED) and status alone (DATE_TOO_EARLY); send status and
+# runSchedule in the same patch. Applied 2026-10-16; snapshot campaigns-20261016T115039.json.
 CHANGES = [
     # (campaign_id, {fields}, human label)
-    (427628234, {"status": "PAUSED"}, "Pause Ethan's Targeting (stop all ads, 2026-10-08)"),
-    (883862684, {"status": "PAUSED"}, "Pause Halojet (stop all ads, 2026-10-08)"),
+    (427628234, {"status": "ACTIVE"}, "Restart Ethan's Targeting (Stacy's go, 2026-10-16)"),
+    (883862684, {"status": "ACTIVE", "runSchedule": {"start": 1789564123179, "end": 1798779599000}},
+     "Restart Halojet through 2026-12-31 (Stacy's go, 2026-10-16)"),
 ]
 # Conversion-rule changes: (rule_id, {fields}, label)
 CONVERSION_CHANGES = [
