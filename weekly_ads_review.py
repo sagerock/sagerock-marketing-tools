@@ -15,7 +15,7 @@ MCC_ID = "3282542648"
 
 
 def get_client():
-    return GoogleAdsClient.load_from_storage(CONFIG_PATH, version="v22")
+    return GoogleAdsClient.load_from_storage(CONFIG_PATH, version="v23")
 
 
 def get_client_accounts(client):

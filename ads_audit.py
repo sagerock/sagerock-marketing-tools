@@ -15,7 +15,7 @@ CONFIG_PATH = "google_ads_config.yaml"
 
 
 def get_client():
-    return GoogleAdsClient.load_from_storage(CONFIG_PATH, version="v22")
+    return GoogleAdsClient.load_from_storage(CONFIG_PATH, version="v23")
 
 
 def get_ad_group_performance(client, customer_id, start_date, end_date):
