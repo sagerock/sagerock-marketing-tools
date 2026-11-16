@@ -175,6 +175,22 @@ BREAKS = [
         "deliberate": True,
         "affects": ["LinkedIn", "Facebook", "Bing", "retargeting audiences"],
     },
+    {
+        "date": "2026-11-16",
+        "platform": "LinkedIn Ads / Google Ads",
+        "symptom": "LinkedIn spend, impressions and clicks go to zero. Google Ads spend, "
+                   "clicks and search traffic rise (new Search campaign, up to $65/day), "
+                   "and Google-reported conversions can rise as Search leads come in.",
+        "cause": "Sage moved the budget from LinkedIn to Google Search until mid-December "
+                 "(LinkedIn Oct: $826 for 1 site click, 0 sample requests). LinkedIn "
+                 "883862684 and 427628234 paused ~09:22 ET (snapshot "
+                 "campaigns-20261116T092238.json). Google campaign 24465664017 'Search - "
+                 "Lead test - Nov-Dec 2026' runs 2026-11-16 to 2026-12-15, counting only "
+                 "sample requests, Ask Alconox enquiries and purchases.",
+        "deliberate": True,
+        "affects": ["LinkedIn", "Google Ads", "spend", "clicks", "conversions",
+                    "paid traffic", "campaign mix"],
+    },
 ]
 
 
