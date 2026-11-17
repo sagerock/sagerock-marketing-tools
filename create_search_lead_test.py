@@ -229,7 +229,9 @@ AD_GROUPS = [
 
 SITELINKS = [
     ("Request a Free Sample", SAMPLE, "Try an Alconox detergent", "Free sample request form"),
-    ("Ask Alconox", ASK, "Send us a cleaning question", "Technical support answers"),
+    # 2026-11-17: "Ask Alconox" was disapproved (Third Party Consumer Technical Support); swapped live.
+    ("Detergent Selection Guide", f"{SITE}/detergent-selection-guide/", "Find the right detergent",
+     "Match cleaner to your application"),
     ("Cleaning Validation", f"{SITE}/cleaning-validation-methods/", "Residue detection methods",
      "TOC, HPLC, conductivity"),
     ("Clean Lab Glassware", f"{SITE}/videos/how-to-clean-laboratory-glassware/",
